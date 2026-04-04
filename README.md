@@ -2,7 +2,7 @@
 
 ## Prologue: An Apparition in New Haven
 
-Hamlet, Prince of DenmarQ, and his loyal friend Qoratio traveled from the land of DenmarQ to represent their kingdom at YQuantum and learn more about the current state of quantum computing research. After arriving in New Haven on Friday night, Qoratio convinced Hamlet to walk with him through Yale’s famous courtyards. Horatio had heard a rumor that the ghost of an old physicist sometimes shared clues with hackathon participants in the middle of the night...
+Hamlet, Prince of DenmarQ, and his loyal friend Qoratio traveled from the land of DenmarQ to represent their kingdom at YQuantum and learn more about the current state of quantum computing research. After arriving in New Haven on Friday night, Qoratio convinced Hamlet to walk with him through Yale’s famous courtyards. Qoratio had heard a rumor that the ghost of an old physicist sometimes shared clues with hackathon participants in the middle of the night...
 
 The air was cold. The stone walls were silent. Somewhere in the distance, a clock struck midnight. Then they saw him. A pale figure emerged between the arches, dressed in medieval armor but with the unmistakable bearing of an old physicist. The apparition looked at Hamlet and Qoratio with grave patience.
 
@@ -36,7 +36,7 @@ This repo contains everything you need to get going. Mainly:
 
 ### Coding Infrastructure
 
-This challenge will get you started with basic knowledge to use QuEra's upcoming gate-based, error-correction-focused, hardware. For so, you will be operating on our SDK [Bloqade](https://bloqade.quera.com/latest/digital/).
+This challenge will get you started with basic knowledge to use QuEra's upcoming gate-based, error-correction-focused, hardware. To that end, you will be operating on our SDK [Bloqade](https://bloqade.quera.com/latest/digital/).
 
 To get the minimal packages installed all you have to do is make use of [`pyproject.toml`](https://www.notion.so/pyproject.toml) as follows:
 
@@ -92,7 +92,7 @@ We will judge based on the latest commit we find in the pull request before the 
 Your pull request should contain:
 
 1. **A technical write-up** that explains, with plots, code examples and/or visualizations, when and why the statement “*a 1-qubit gate can be harder to implement than a 2-qubit gate”* is true. The five sections in the `challenge.md` file are a suggested path for building the understanding and gathering the material you will need to create an effective write-up. Your final write-up does not need to follow the order in which you explore the topics in `challenge.md`, but it should engage with the main ideas from each of the sections (except for part 5 which is an optional bonus). You should assume the reader is already familiar with Bloqade so you should not explain what Squin, PyQrack, Tsim, and other Bloqade tools are or how to use them.
-2. **Supporting code and figures** used to build your argument. All the code that is mentioned or used in the write-up should be clearly organized inside the repo. We suggest that you use explicit names for your files and that you consider using folders to organize different piece of code. Remember that we should be able to run your code. Make sure that all dependencies are documented in the `pyproject.toml` file and that you use `uv` to manage your Python environments.
+2. **Supporting code and figures** used to build your argument. All the code that is mentioned or used in the write-up should be clearly organized inside the repo. We suggest that you use explicit names for your files and that you consider using folders to organize different pieces of code. Remember that we should be able to run your code. Make sure that all dependencies are documented in the `pyproject.toml` file and that you use `uv` to manage your Python environments.
 3. **A presentation** that you will deliver at the end of the competition, where you share with us what you learned and the results you found. We encourage you to explain, to the best of your understanding, why this topic is important for the future of quantum computing.
 
 Make sure all your files are on your pull request on time!
@@ -114,11 +114,11 @@ The strongest submission will likely:
 - Use visualizations to build intuition
 - Explain what strategies were explored and why. How did you reason about what you discovered and what did you consider to be "better"?
 - Connect the different parts into a coherent story
-- Leave Hamlet and Qoratio (the reader) with a sharper sense of what is the current status of quantum computing research
+- Leave Hamlet and Qoratio (the reader) with a sharper sense of what the current status of quantum computing research is
 
 For the code and presentation we will reward:
 
-- Correctness. Does your code and the methods you used make sense in this context?
+- Correctness. Do your code and the methods you used make sense in this context?
 - Clarity. Can we easily understand and run the key portions of your code?
-- How far did you push the gate synthesis and the simulation methods? How did you navigate the different trade-offs presented in the challenge.
-- Quality of visualizations and comparisons. How did you use your technical skills to visualize/compare different approaches.
+- How far did you push the gate synthesis and the simulation methods? How did you navigate the different trade-offs presented in the challenge?
+- Quality of visualizations and comparisons. How did you use your technical skills to visualize/compare different approaches?

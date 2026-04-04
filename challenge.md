@@ -44,7 +44,7 @@ For plotting data and visualizing state evolution, circuit structure, or gate ac
 # Suggested path
 
 We **strongly** suggest that you break the work up into two sub-teams:
-- **Team Syntehsis** focused on exploring how to optimally synthesize 1-qubit rotations both physically and logically
+- **Team Synthesis** focused on exploring how to optimally synthesize 1-qubit rotations both physically and logically
 - **Team STAR** focused on implementing early fault-tolerant rotation gadgets  
 
 For each team we provide 4 different tasks of increasing difficulty. 
@@ -72,7 +72,7 @@ $$
 
 How can we implement these “dyadic” $Z$-rotations using only Clifford+$T$?
 
-Try synthesizing these rotations as well as you can using only our chosen gate set for one qubit (yes, only 1 qubit), and different values of $k$. Some implementations may be exact while others may involve approximations, that is okay. It is up to you to explore different synthesis strategies and compare the circuits you find.
+Try synthesizing these rotations as well as you can using only our chosen gate set for one qubit (yes, only 1 qubit), and different values of $n$. Some implementations may be exact while others may involve approximations, that is okay. It is up to you to explore different synthesis strategies and compare the circuits you find.
 
 We suggest spending time on finding ways to visualize how your approximations act on different initial states, and reflecting on what you tried, how you judged quality, and what changed as the target angle became smaller.
 
@@ -101,7 +101,7 @@ To counteract this not-good news, you will now have access to auxiliary qubits o
 
 Track the new costs that appear: ancilla count, 2-qubit gate count, circuit depth, repeated trials, feed-forward, or any other relevant overhead.
 
-**Goal:** Rebuild the same 1-qubit rotations in a setting where gates (the non-Clifford gate in the Clifford+ $T$ set) must be supplied indirectly.
+**Goal:** Rebuild the same 1-qubit rotations in a setting where the non-Clifford gates in the Clifford+ $T$ set must be supplied indirectly.
 
 ---
 
@@ -115,9 +115,9 @@ Research the $[[7, 1, 3]]$
  Steane code and learn about which gates in the Clifford+ $T$ are "transversal" in this code. Then, construct a kernel that implements the $[[7, 1, 3]]$
  code (note, the circuit above encodes the $|0\rangle$ state) in Squin and use it to represent one logical qubit.
 
-Keeping in mind which gates in the Clifford+ $T$ set are transversal and which ones are not, explore how to apply the same family of target rotations on this one logical qubit. This will require careful circuit design, smart synthesis, and some form of injecting  $T$-gates (but now onto a logical qubit).
+Keeping in mind which gates in the Clifford+$T$ set are transversal and which ones are not, explore how to apply the same family of target rotations on this one logical qubit. This will require careful circuit design, smart synthesis, and some form of injecting $T$-gates (but now onto a logical qubit).
 
-Like in Part 3, benchmark your approximations, track the new costs that appear, and reflect on the overhead that moving from one physical qubit to one logical qubits creates. You can also explore the transition from one physical qubit to one logical qubit in a noisy setting (the tutorial we shared should help you think about how to add noise).
+Like in Part 3, benchmark your approximations, track the new costs that appear, and reflect on the overhead that moving from one physical qubit to one logical qubit creates. You can also explore the transition from one physical qubit to one logical qubit in a noisy setting (the tutorial we shared should help you think about how to add noise).
 
 **Goal:** Show how the challenge changes when one physical qubit becomes one logical qubit (optionally with noise).
 
@@ -130,22 +130,48 @@ Familiarize yourself with the surface code and its stabilizer structure.
 Use Tsim to construct a distance-3 surface code and simulate two rounds of syndrome extraction.
 
 Start by identifying the data and ancilla qubits, the stabilizer checks being measured, and how syndrome information is extracted over time. 
-Use this part to get comfortable building the code in Tsim, running repeated syndrome cycles, and visualizing how errors propagate through the circuit.
+Use this part to get comfortable building the code in Tsim, running repeated syndrome cycles, and understanding how errors affect the circuit.
 
 **Goal:** Build intuition for the distance-3 surface code, repeated syndrome extraction, and the simulation workflow in Tsim.
 
 ## Team STAR Part 2: Estimate STAR Fidelities
 Review the STAR circuits that have been provided in the assets folder and use Tsim to simulate them in a noisy setting. 
-Reproduce the fidelity plot below using data from your tsim simulations.
+Reproduce the fidelity plot below using data from your Tsim simulations.
 
 ![star_sim.svg](./assets/star_sim.svg)
 
-**Goal:** Learn how to load and run pre-built circuits using tsim. 
+The provided circuits are for a default rotation angle of 0.01*pi. To simulate different rotation angles, you can use the following function to compute the physical rotation angle needed to achieve a logical rotation of angle `logical_angle_in_pi` on `num_physical_rotations` physical rotations.
 
-## STAR Part 3 — Teleport a non-Clifford rotation into a logical qubit
+Also make sure to check out the comments in `circuits/star_d=3.stim` to get some hints about the circuit structure.
+```python
+def physical_angle(logical_angle_in_pi: float, num_physical_rotations: int) -> float:
+    """
+    Compute the physical rotation angle needed to achieve a logical rotation of
+    angle `logical_angle_in_pi` on `num_physical_rotations` physical rotations.
+
+    Args:
+        logical_angle_in_pi (float): The logical rotation angle in units of pi.
+        num_physical_rotations (int): The number of physical rotations that are applied.
+    Returns:
+        float: The physical rotation angle in units of pi.
+    """
+
+    assert (
+        num_physical_rotations % 2 == 1 and num_physical_rotations > 0
+    ), "k must be a positive odd integer"
+    sign = -1 if (num_physical_rotations + 1) % 4 == 0 else 1
+    logical_angle_in_rad = logical_angle_in_pi * np.pi
+    x = np.tan(logical_angle_in_rad / 2) ** (1 / num_physical_rotations)
+    theta_phys = 2 * np.arctan(x)
+    return float(sign * theta_phys / np.pi)
+```
+
+**Goal:** Learn how to load and run pre-built circuits using Tsim. 
+
+## Team STAR Part 3 — Teleport a non-Clifford rotation into a logical qubit
 Now assume a noiseless setting but where non-Clifford gates cannot be applied directly to the main logical qubit. 
 Construct a protocol that uses an ancillary logical qubit to teleport a small-angle rotation into the main qubit while assuming the STAR transversal architecture.
-Important: you will need to use postselection to filter results because tsim (unlike pyqrack) does not support feed-forwarded operations.
+Important: you will need to use postselection to filter results because Tsim (unlike PyQrack) does not support feed-forwarded operations.
 
 ![rus.png](./assets/rus.png)
 
@@ -164,11 +190,11 @@ Some works you might find useful throughout the challenge are:
 
 1. *“Quantum Computing, Universal Gate Sets”* https://www.scottaaronson.com/qclec/16.pdf
 2. *“The Solovay-Kitaev Algorithm”* https://arxiv.org/pdf/quant-ph/0505030
-2. *“Optimal ancilla-free Clifford+T approximation of z-rotations”* https://arxiv.org/abs/1403.2975
-3. *“Efficient synthesis of universal Repeat-Until-Success circuits”* https://arxiv.org/abs/1404.5320
-4. *“Partially Fault-tolerant Quantum Computing Architecture with Error-corrected
-Cliﬀord Gates and Space-time Eﬃcient Analog Rotations”* https://arxiv.org/pdf/2303.13181
-5. *“Practical quantum advantage on partially fault-tolerant quantum computer”* https://arxiv.org/pdf/2408.14848
-6. *“Transversal STAR architecture for megaquop-scale quantum simulation
+3. *“Optimal ancilla-free Clifford+T approximation of z-rotations”* https://arxiv.org/abs/1403.2975
+4. *“Efficient synthesis of universal Repeat-Until-Success circuits”* https://arxiv.org/abs/1404.5320
+5. *“Partially Fault-tolerant Quantum Computing Architecture with Error-corrected
+Clifford Gates and Space-time Efficient Analog Rotations”* https://arxiv.org/pdf/2303.13181
+6. *“Practical quantum advantage on partially fault-tolerant quantum computer”* https://arxiv.org/pdf/2408.14848
+7. *“Transversal STAR architecture for megaquop-scale quantum simulation
 with neutral atoms”* https://arxiv.org/pdf/2509.18294
 ---
