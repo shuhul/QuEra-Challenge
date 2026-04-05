@@ -2,6 +2,8 @@
 
 **Team:** [shuhul](https://github.com/shuhul), [emiIiano](https://github.com/emiIiano), [ThuwarageshJ](https://github.com/ThuwarageshJ), [nmadhu6002](https://github.com/nmadhu6002), [jujurover](https://github.com/jujurover)
 
+**Write-up:** The final technical report for this challenge can be found in [`YQuantum_2026_Submission___Calbits.pdf`](./YQuantum_2026_Submission___Calbits.pdf).
+
 ### Repo Structure
 
 ```
