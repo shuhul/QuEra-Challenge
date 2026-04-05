@@ -25,7 +25,3 @@ post-selection (Repeat-Until-Success, since Tsim does not support feed-forward).
 - Survival rate tracks cos²(θ_L π/2)
 - Angle sweep from 0.001π to 0.5π with 50k shots per angle
 - `teleportation_results.png` — Error rate and survival plots
-
-## Writeup
-
-- `writeup/STAR_part3_writeup.tex` — Full LaTeX writeup with protocol, qubit layout, cost analysis

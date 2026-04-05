@@ -17,7 +17,7 @@ synthesis/
 │   ├── logical_qubit.py          # Steane [[7,1,3]] encoding, transversal gates, logical T
 │   └── verify_magic_state.py     # Standalone magic state verification
 └── common/
-    └── generate_figures.py       # Bloch sphere figures for writeup (H, S, T, continuous)
+    └── generate_figures.py       # Bloch sphere figures (H, S, T, continuous)
 ```
 
 ## Running
@@ -65,7 +65,7 @@ Prints gate action verification for all Clifford+T gates on simple states:
 - Full cost comparison: physical vs logical qubit overhead
 
 ### `generate_figures.py`
-Generates Bloch sphere figures for the writeup:
+Generates Bloch sphere figures:
 - `figures/bloch_gates_HST.{png,pdf}` — T, S, H gate visualizations
 - `figures/bloch_continuous.{png,pdf}` — Continuous vs discrete Bloch sphere
 - `figures/cnot_truth_table.{png,pdf}` — CNOT truth table
