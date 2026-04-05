@@ -4,6 +4,8 @@
 
 **Write-up:** The final technical report for this challenge can be found in [`YQuantum_2026_Submission___Calbits.pdf`](./YQuantum_2026_Submission___Calbits.pdf).
 
+**Presentation:** Calbits Presentation.pptx
+
 ### Repo Structure
 
 ```
