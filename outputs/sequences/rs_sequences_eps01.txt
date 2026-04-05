@@ -1,0 +1,9 @@
+n=3  Rz(pi/8)  eps=0.1  gates=40  T-count=14  distance=0.025900
+Sequence: S H T S H T H T S H T S H T S H T H T S H T H T S H T S H T S H T H T S H T S S
+
+n=4  Rz(pi/16)  eps=0.1  gates=30  T-count=10  distance=0.017346
+Sequence: S H T S H T H T H T H T H T S H T H T S H T S H T S H X S S
+
+n=5  Rz(pi/32)  eps=0.05  gates=44  T-count=16  distance=0.007989
+Sequence: H T S H T S H T H T H T S H T S H T S H T S H T H T H T S H T H T H T H T S H T S H X S
+

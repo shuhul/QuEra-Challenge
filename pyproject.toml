@@ -1,11 +1,16 @@
 [project]
 name = "yquantum_challenge"
 version = "0.1.0"
-description = "This environment should help you run your code during the challenge"
+description = "Team Calbits — YQuantum 2026 QuEra Challenge"
 readme = "README.md"
 requires-python = "==3.12.*"
 dependencies = [
     "bloqade>=0.32.0",
     "bloqade-circuit[tsim]>=0.11.2",
+    "imageio>=2.34.0",
     "jupyterlab>=4.5.3",
+    "matplotlib>=3.9.0",
+    "mpmath>=1.3.0",
+    "numpy>=2.0.0",
+    "pygridsynth>=0.1.0",
 ]
