@@ -9,8 +9,9 @@ star/
 ├── part1_surface_code/                          # Emiliano
 │   ├── surface_code_d3.py                       # Distance-3 surface code + syndrome extraction
 │   ├── validate_surface_code.py                 # Validation of surface code implementation
-│   ├── STAR_P1_CNOT_IMPORTANT_SCHEDULE.png      # CNOT scheduling reference
-│   ├── STAR_P1_Patch_geometry_IMPORTANT.png     # Patch geometry reference
+│   ├── noise_models.py                          # Circuit-level noise (depolarizing, gate, readout)
+│   ├── surface_code_generator.py                # Arbitrary-distance surface code geometry
+│   ├── noise_models_multiscale.py               # Multi-distance noise analysis
 │   ├── star_scaling_analysis.png                # Scaling analysis plot
 │   ├── star_scaling_normalized.png              # Normalized scaling plot
 │   └── star_scaling_plots/                      # Additional scaling analysis
@@ -27,7 +28,8 @@ star/
 │   ├── part3.ipynb                              # Gate teleportation protocol (Tsim)
 │   └── README.md                                # Protocol description
 └── part4_qft_circuit/                           # Emiliano
-    └── qft_teleported_rotations.ipynb           # 4-qubit QFT with teleported non-Clifford gates
+    ├── qft_resource_analysis.py                 # 4-qubit QFT resource analysis with STAR
+    └── qft_teleported_rotations.ipynb           # QFT with teleported non-Clifford gates
 ```
 
 ## Running
@@ -48,8 +50,9 @@ uv run jupyter lab star/part2_star_fidelity/star_fidelity_simulation.ipynb
 uv run jupyter lab star/part3_teleported_rotation/part3.ipynb
 ```
 
-### Part 4: QFT Circuit (Jupyter notebook)
+### Part 4: QFT Resource Analysis
 ```bash
+uv run python star/part4_qft_circuit/qft_resource_analysis.py
 uv run jupyter lab star/part4_qft_circuit/qft_teleported_rotations.ipynb
 ```
 
@@ -60,6 +63,11 @@ uv run jupyter lab star/part4_qft_circuit/qft_teleported_rotations.ipynb
 - Simulates two rounds of syndrome extraction
 - Identifies data/ancilla qubits and stabilizer checks
 - Outputs scaling analysis (plots in `star_scaling_plots/`)
+
+### Part 1: `noise_models.py` + `noise_models_multiscale.py`
+- Circuit-level noise (depolarizing on data, 2-qubit gate noise, measurement noise)
+- Multi-distance comparison of detection rates
+- Clean vs noisy analysis, noise sweeps, bulk/boundary scaling
 
 ### Part 2: `star_fidelity_simulation.ipynb`
 - Loads STAR circuits from challenge assets
@@ -74,7 +82,8 @@ uv run jupyter lab star/part4_qft_circuit/qft_teleported_rotations.ipynb
 - Post-selection survival tracks cos²(θ_L π/2)
 - Output: `teleportation_results.png`
 
-### Part 4: `qft_teleported_rotations.ipynb`
-- Constructs a 4-qubit QFT circuit
-- All non-Clifford gates are teleported in (not applied directly)
-- Evaluates scalability of the approach
+### Part 4: `qft_resource_analysis.py`
+- Defines 4-qubit QFT gate structure (Clifford vs non-Clifford classification)
+- Parses STAR .stim circuits for resource counting
+- Computes total physical overhead: qubits, CX gates, measurements, detectors
+- 3 non-Clifford gates (CP(π/4), CP(π/8)) require STAR teleportation

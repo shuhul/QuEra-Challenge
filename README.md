@@ -23,12 +23,16 @@
 ├── star/                                        # STAR Architecture Track (Joshua, Emiliano)
 │   ├── part1_surface_code/
 │   │   ├── surface_code_d3.py                   # Distance-3 surface code (Tsim)
-│   │   └── validate_surface_code.py             # Surface code validation
+│   │   ├── validate_surface_code.py             # Surface code validation
+│   │   ├── noise_models.py                      # Circuit-level noise channels
+│   │   ├── surface_code_generator.py            # Arbitrary-distance geometry
+│   │   └── noise_models_multiscale.py           # Multi-distance noise analysis
 │   ├── part2_star_fidelity/
 │   │   └── star_fidelity_simulation.ipynb       # STAR fidelity reproduction
 │   ├── part3_teleported_rotation/
 │   │   └── part3.ipynb                          # Gate teleportation protocol (Tsim)
 │   └── part4_qft_circuit/
+│       ├── qft_resource_analysis.py             # QFT resource analysis with STAR
 │       └── qft_teleported_rotations.ipynb       # 4-qubit QFT with teleported gates
 │
 ├── figures/                                     # Generated plots and visualizations
@@ -76,7 +80,8 @@ uv run jupyter lab star/part2_star_fidelity/star_fidelity_simulation.ipynb
 # Part 3: Teleported rotation (Jupyter notebook)
 uv run jupyter lab star/part3_teleported_rotation/part3.ipynb
 
-# Part 4: QFT circuit (Jupyter notebook)
+# Part 4: QFT resource analysis + circuit
+uv run python star/part4_qft_circuit/qft_resource_analysis.py
 uv run jupyter lab star/part4_qft_circuit/qft_teleported_rotations.ipynb
 ```
 
